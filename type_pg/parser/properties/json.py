@@ -8,8 +8,8 @@ from .protocol import PropertyProtocol, Value, is_casted_null
 
 
 @define
-class DictProperty(PropertyProtocol):
-    """A property of type float"""
+class JsonProperty(PropertyProtocol):
+    """A property representing json/jsonb"""
 
     name: str
     required: bool
@@ -17,7 +17,7 @@ class DictProperty(PropertyProtocol):
     python_name: PythonIdentifier
     comment: str | None
 
-    _type_string: ClassVar[str] = "Dict[str, Any]"
+    _type_string: ClassVar[str] = "Any"
 
     @classmethod
     def build(
@@ -27,7 +27,7 @@ class DictProperty(PropertyProtocol):
         default: Any,
         python_name: PythonIdentifier,
         comment: str | None,
-    ) -> Union["DictProperty", PropertyError]:
+    ) -> Union["JsonProperty", PropertyError]:
         checked_default = cls.convert_value(default)
         if isinstance(checked_default, PropertyError):
             return checked_default
@@ -60,7 +60,7 @@ class DictProperty(PropertyProtocol):
         imports = super().get_imports(prefix=prefix)
         imports.update(
             {
-                "from typing import Dict, Any",
+                "from typing import Any",
             }
         )
         return imports

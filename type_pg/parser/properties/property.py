@@ -8,7 +8,7 @@ from .bool import BoolProperty
 from .bytes import BytesProperty
 from .date import DateProperty
 from .datetime import DateTimeProperty
-from .dict import DictProperty
+from .json import JsonProperty
 from .enum_property import EnumProperty
 from .float import FloatProperty
 from .int import IntProperty
@@ -29,7 +29,7 @@ Property: TypeAlias = Union[
     ModelProperty,
     NoneProperty,
     StrProperty,
-    DictProperty,
+    JsonProperty,
     DateProperty,
     TimeProperty,
 ]

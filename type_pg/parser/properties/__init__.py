@@ -13,7 +13,7 @@ from .bool import BoolProperty
 from .bytes import BytesProperty
 from .date import DateProperty
 from .datetime import DateTimeProperty
-from .dict import DictProperty
+from .json import JsonProperty
 from .enum_property import EnumProperty
 from .float import FloatProperty
 from .int import IntProperty
@@ -160,7 +160,7 @@ def _primitive_property_from_data(
             data.comment,
         )
     if data.type in ("json", "jsonb"):
-        return DictProperty.build(
+        return JsonProperty.build(
             name,
             required,
             data.default,
