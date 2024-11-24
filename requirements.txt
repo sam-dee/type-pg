@@ -1,0 +1,10 @@
+attrs~=24.2.0
+python-dateutil~=2.9.0.post0
+attr~=0.3.2
+typing_extensions~=4.12.2
+psycopg[binary]~=3.2.3
+Jinja2~=3.1.4
+typer~=0.13.0
+pydantic~=2.9.2
+wordninja~=2.0.0
+asyncpg~=0.30.0

@@ -1,0 +1,94 @@
+{% from "helpers.jinja" import auto_generated %}
+{{ auto_generated() }}
+from asyncpg import Connection
+{% for relative in routine.relative_imports %}
+{{ relative }}
+{% endfor %}
+
+{%- if routine.returns_rows -%}
+from typing import Optional, Literal, Union, overload
+{%- endif -%}
+{% set routine_name = routine.python_name %}
+{% set routine_type = routine.data_type %}
+
+{# should declare anonymous table here. Only accessible by local function #}
+{% if routine.returns_anonymous_table %}
+from pydantic import BaseModel, Field
+
+{% set model = routine_type.inner_property %}
+
+{% for relative in model.relative_imports %}
+{{ relative }}
+{% endfor %}
+
+{% set class_name = model.class_info.name %}
+{% set module_name = model.class_info.module_name %}
+
+class {{ class_name }}(BaseModel):
+    {% for property in model.properties%}
+    {{ property.to_string() }}
+    {% endfor %}
+{% endif %}
+
+{%- macro sql_params_indexes() %}
+{%- for i in range(routine.parameters|length) -%}
+    ${{ i+1 }}{% if not loop.last %},{% endif %}
+{%- endfor -%}
+{% endmacro -%}
+
+{%- macro params() %}
+{% for parameter in routine.parameters%}
+    {{ parameter.python_name }},
+{% endfor %}
+{% endmacro -%}
+
+{%- macro routine_params() %}
+{% for parameter in routine.parameters%}
+    {{ parameter.to_function_string() }},
+{% endfor %}
+{% endmacro -%}
+
+
+{%- if routine.returns_rows %}
+@overload
+async def {{ routine_name }}(
+    connection: Connection,
+    {{ routine_params() }}
+    *,
+    return_object: Literal[False] = False
+) -> {{ routine_type.get_type_string() }}:
+    pass
+
+@overload
+async def {{ routine_name }}(
+    connection: Connection,
+    {{ routine_params() }}
+    *,
+    return_object: Literal[True] = True
+) -> Optional[{{ routine_type.inner_property.get_type_string() }}]:
+    pass
+{% endif -%}
+
+async def {{ routine_name }}(
+    connection: Connection,
+    {{ routine_params() }}
+{%- if routine.returns_rows -%}
+    *,
+    return_object: Literal[True, False] = False
+{%- endif -%}
+) -> {%- if routine.returns_rows -%} {{ routine_type.get_type_string() }} | Optional[{{ routine_type.inner_property.get_type_string() }}] {% else %} {{ routine_type.get_type_string() }} {%- endif -%}:
+    {% if routine.returns_rows %}
+        if not return_object:
+            rows = await connection.fetch("select * from {{ routine.full_name }}({{- sql_params_indexes() -}})", {{ params() }})
+            if not rows:
+                return []
+            return [{{ routine_type.inner_property.get_type_string() }}(**r) for r in rows]
+        else:
+            row = await connection.fetchrow("select * from {{ routine.full_name }}({{- sql_params_indexes() -}})", {{ params() }})
+            if not row:
+                return None
+            return {{ routine_type.inner_property.get_type_string() }}(**row)
+    {% else %}
+        val = await connection.fetchval("select * from {{ routine.full_name }}({{- sql_params_indexes() -}})", {{ params() }})
+        return cast({{ routine_type.get_type_string() }}, val)
+    {% endif %}

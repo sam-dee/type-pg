@@ -1,0 +1,15 @@
+{% from "helpers.jinja" import auto_generated %}
+{{ auto_generated() }}
+from pydantic import BaseModel, Field
+
+{% for relative in model.relative_imports %}
+{{ relative }}
+{% endfor %}
+
+{% set class_name = model.class_info.name %}
+{% set module_name = model.class_info.module_name %}
+
+class {{ class_name }}(BaseModel):
+    {% for property in model.properties%}
+    {{ property.to_string() }}
+    {% endfor %}
