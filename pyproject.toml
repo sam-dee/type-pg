@@ -1,6 +1,19 @@
 [project]
-name = "pgtype-generator"
+name = "type_pg"
 readme = "README.md"
+version = "1.0.0"
+dependencies = [
+    "attrs~=24.2.0",
+    "python-dateutil~=2.9.0.post0",
+    "attr~=0.3.2",
+    "typing_extensions~=4.12.2",
+    "psycopg[binary]~=3.2.3",
+    "Jinja2~=3.1.4",
+    "typer<0.13.0",
+    "pydantic~=2.9.2",
+    "wordninja~=2.0.0",
+    "asyncpg~=0.30.0"
+]
 
 
 [tool.coverage.paths]
@@ -10,11 +23,6 @@ source = ["app"]
 branch = true
 source = ["app"]
 omit = [
-    "app/timer.py",
-    "app/emptystrfixer.py",
-    "app/logger.py",
-    "app/pim/excel_template/*",
-    "app/pim/ops/*"
 ]
 
 [tool.coverage.report]
@@ -34,7 +42,7 @@ all = true
 
 [tool.black]
 line-length = 119
-target-version = ['py310']
+target-version = ['py311']
 quiet = 0
 exclude = '''
 (
@@ -103,3 +111,13 @@ filterwarnings = [
     'ignore:There is no current event loop'
 ]
 asyncio_mode = 'auto'
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "type_pg",
+]
+exclude = []
