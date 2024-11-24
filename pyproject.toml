@@ -10,7 +10,7 @@ dependencies = [
     "psycopg[binary]~=3.2.3",
     "Jinja2~=3.1.4",
     "typer<0.13.0",
-    "pydantic~=2.9.2",
+    "pydantic<2.0.0",
     "wordninja~=2.0.0",
     "asyncpg~=0.30.0"
 ]
