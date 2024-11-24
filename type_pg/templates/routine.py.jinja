@@ -85,7 +85,7 @@ async def {{ routine_name }}(
             return [{{ routine_type.inner_property.get_type_string() }}(**r) for r in rows]
         else:
             row = await connection.fetchrow("select * from {{ routine.full_name }}({{- sql_params_indexes() -}})", {{ params() }})
-            if not row or all(v is None for c in row.values()):
+            if not row or all(v is None for v in row.values()):
                 return None
             return {{ routine_type.inner_property.get_type_string() }}(**row)
     {% else %}
