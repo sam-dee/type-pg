@@ -63,6 +63,7 @@ class Project:
 
     def build(self) -> Sequence[GeneratorError]:
         if self.package_dir.is_dir():
+            print(f"Removing dir {self.package_dir=}...")
             shutil.rmtree(self.package_dir)
 
         self._create_package()
