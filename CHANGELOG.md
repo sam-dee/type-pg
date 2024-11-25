@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.3.0 (2024-11-25)
+
+### Features
+
+- **test**: Change config
+  ([`910c742`](https://github.com/sam-dee/type-pg/commit/910c74209d4f5b912e9b54bf181a128ba1ffc25b))
+
+
 ## v0.2.2 (2024-11-25)
 
 ### Bug Fixes
