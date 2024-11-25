@@ -10,6 +10,13 @@ repo_dir = "/Users/mikhailtarasov/PycharmProjects/type_pg"
 no_git_verify = false
 tag_format = "v{version}"
 
+version_variable = [
+    "version.py:__version__"
+]
+version_toml = [
+    "pyproject.toml:project.version"
+]
+
 [semantic_release.branches.main]
 match = "(main|master)"
 prerelease_token = "rc"
