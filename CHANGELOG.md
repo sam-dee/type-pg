@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.3.3 (2024-11-25)
+
+### Bug Fixes
+
+- **var name**: Version_variable to version_variables
+  ([`b5a49c1`](https://github.com/sam-dee/type-pg/commit/b5a49c12cefa0c3598f791185b3aaad6f4f9073f))
+
+
 ## v0.3.2 (2024-11-25)
 
 ### Bug Fixes
