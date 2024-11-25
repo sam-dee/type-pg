@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.3.2 (2024-11-25)
+
+### Bug Fixes
+
+- **init**: Rename to init
+  ([`3a63376`](https://github.com/sam-dee/type-pg/commit/3a63376fd53729698cd37aab72e2c3569525259d))
+
+
 ## v0.3.1 (2024-11-25)
 
 ### Bug Fixes
