@@ -1,7 +1,7 @@
 [project]
 name = "type_pg"
 readme = "README.md"
-version = "0.3.4"
+version = "1.0.4"
 dependencies = [
     "attrs~=24.2.0",
     "python-dateutil~=2.9.0.post0",
