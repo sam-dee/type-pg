@@ -10,7 +10,7 @@ repo_dir = "/Users/mikhailtarasov/PycharmProjects/type_pg"
 no_git_verify = false
 tag_format = "v{version}"
 
-version_variable = [
+version_variables = [
     "__init__.py:__version__"
 ]
 version_toml = [
