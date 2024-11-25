@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.2.2 (2024-11-25)
+
+### Bug Fixes
+
+- **test**: Change text
+  ([`35b1615`](https://github.com/sam-dee/type-pg/commit/35b161571e8bb01d2897250e525d8820ec0878c4))
+
+
 ## v0.2.1 (2024-11-25)
 
 ### Bug Fixes
