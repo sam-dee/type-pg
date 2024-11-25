@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.3.1 (2024-11-25)
+
+### Bug Fixes
+
+- **version.py**: Add new line
+  ([`67aa4ff`](https://github.com/sam-dee/type-pg/commit/67aa4ff4e082d03e478a6a757bb08371224bfe17))
+
+
 ## v0.3.0 (2024-11-25)
 
 ### Features
