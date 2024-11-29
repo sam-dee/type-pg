@@ -18,6 +18,7 @@ class Config:
         "ruff check . --fix --extend-select=I",
         "ruff format .",
         "black .",
+        "git add ."
     ]
 
     project_dir: Optional[str] = None
