@@ -15,7 +15,7 @@ class Config:
     remove_function_parameter_prefixes: List[str] | None
 
     post_hooks: Optional[List[str]] = [
-        "ruff check . --fix --extend-select=I",
+        "ruff check . --fix",
         "ruff format .",
         "black .",
         "git add ."
