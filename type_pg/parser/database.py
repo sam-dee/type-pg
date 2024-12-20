@@ -93,7 +93,7 @@ class Routine:
 
         # no need to import AnonymousTable
         # if not isinstance(data.type, postgres.AnonymousTable):
-        routine.relative_imports.update(data_type.get_imports(prefix="."))
+        routine.relative_imports.update(data_type.get_imports(prefix=".."))
 
         for parameter in data.parameters:
             prop, _ = property_from_data(
@@ -107,7 +107,7 @@ class Routine:
             if isinstance(prop, PropertyError):
                 return ParseError(detail=prop.detail)
 
-            routine.relative_imports.update(prop.get_imports(prefix="."))
+            routine.relative_imports.update(prop.get_imports(prefix=".."))
 
             routine.parameters.append(prop)
 

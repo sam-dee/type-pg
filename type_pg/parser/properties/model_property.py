@@ -95,9 +95,9 @@ class ModelProperty(PropertyProtocol):
             }
         )
         if isinstance(self.data, ObjectType):
-            imports.add(f"from {prefix}.object_types {self.self_import}")
+            imports.add(f"from {prefix}.{self.data.schema}.object_types {self.self_import}")
         elif isinstance(self.data, Table):
-            imports.add(f"from {prefix}.tables {self.self_import}")
+            imports.add(f"from {prefix}.{self.data.schema}.tables {self.self_import}")
         return imports
 
     @property
@@ -134,8 +134,8 @@ def process_model(model_prop: ModelProperty, *, types: Types, config: Config) ->
         if isinstance(prop_or_error, PropertyError):
             return prop_or_error
 
-        imports = prop_or_error.get_imports(prefix=".")
-        model_prop.relative_imports.update(prop_or_error.get_imports(prefix="."))
+        imports = prop_or_error.get_imports(prefix="..")
+        model_prop.relative_imports.update(prop_or_error.get_imports(prefix=".."))
         properties.append(prop_or_error)
 
     model_prop.properties = properties
