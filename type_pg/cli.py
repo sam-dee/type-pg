@@ -23,6 +23,7 @@ def generate(
     db_user: str = Option("postgres", help="User of the database"),
     db_password: str = Option("postgres", help="Password for the database user"),
     project_dir: str | None = Option(None, help="Path to project directory (if none use cwd)"),
+    async_mode: bool = Option(default=True, help="Async mode"),
 ) -> None:
     config = Config(
         connection_string=f"host={db_host} port={db_port} dbname={db_name} user={db_user} password={db_password}",
@@ -31,6 +32,7 @@ def generate(
         exclude_schemas=exclude_schemas,
         project_dir=project_dir,
         remove_function_parameter_prefixes=["p"],
+        async_mode=async_mode
     )
 
     create_new_client(config=config)

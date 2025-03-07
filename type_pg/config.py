@@ -22,3 +22,4 @@ class Config:
     ]
 
     project_dir: Optional[str] = None
+    async_mode: bool = True

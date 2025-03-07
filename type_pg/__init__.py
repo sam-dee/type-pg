@@ -169,7 +169,11 @@ class Project:
                     # encoding=self.config.file_encoding,
                 )
 
-            routine_template = self.env.get_template("routine.py.jinja")
+            if self.config.async_mode:
+                routine_template = self.env.get_template("async_routine.py.jinja")
+
+            else:
+                routine_template = self.env.get_template("sync_routine.py.jinja")
 
             if schema.routines:
                 routines_dir = schema_dir / "routines"
