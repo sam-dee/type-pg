@@ -169,6 +169,7 @@ class Project:
                     # encoding=self.config.file_encoding,
                 )
 
+            print(f"self.config.async_mode: {self.config.async_mode}")
             if self.config.async_mode:
                 routine_template = self.env.get_template("async_routine.py.jinja")
 

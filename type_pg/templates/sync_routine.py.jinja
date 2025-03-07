@@ -32,7 +32,7 @@ class {{ class_name }}(BaseModel):
 
 {%- macro sql_params_indexes() %}
 {%- for i in range(routine.parameters|length) -%}
-    ${{ i+1 }}{% if not loop.last %},{% endif %}
+    $s{% if not loop.last %},{% endif %}
 {%- endfor -%}
 {% endmacro -%}
 
