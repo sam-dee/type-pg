@@ -1,6 +1,7 @@
 {% from "helpers.jinja" import auto_generated %}
 {{ auto_generated() }}
 from psycopg import Connection
+from psycopg.rows import dict_row
 {% for relative in routine.relative_imports %}
 {{ relative }}
 {% endfor %}
@@ -32,7 +33,7 @@ class {{ class_name }}(BaseModel):
 
 {%- macro sql_params_indexes() %}
 {%- for i in range(routine.parameters|length) -%}
-    $s{% if not loop.last %},{% endif %}
+    %s{% if not loop.last %},{% endif %}
 {%- endfor -%}
 {% endmacro -%}
 
@@ -77,7 +78,7 @@ def {{ routine_name }}(
     return_object: Literal[True, False] = False
 {%- endif -%}
 ) -> {%- if routine.returns_rows -%} {{ routine_type.get_type_string() }} | Optional[{{ routine_type.inner_property.get_type_string() }}] {% else %} {{ routine_type.get_type_string() }} {%- endif -%}:
-    cursor = connection.cursor()
+    cursor = connection.cursor(row_factory=dict_row)
 
     cursor.execute(
         "select * from {{ routine.full_name }}({{- sql_params_indexes() -}})",
