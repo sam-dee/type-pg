@@ -29,6 +29,8 @@ def _get_database(config: Config) -> Database | GeneratorError:
     for db_schema in schemas:
         schema = Schema(db_schema["name"], db_schema["comment"])
         for db_table in db.get_tables(schema.name):
+            if f'{schema.name}.{db_table["name"]}' in config.exclude_tables:
+                continue
             table = Table(schema.name, db_table["name"], db_table["comment"])
             for db_table_column in db.get_table_columns(schema.name, table.name):
                 column = Column(
