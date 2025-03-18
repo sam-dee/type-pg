@@ -32,7 +32,7 @@ def generate(
         database_name=db_name,
         schemas=schemas,
         exclude_schemas=exclude_schemas,
-        exclude_tables=exclude_tables,
+        exclude_tables=exclude_tables or [],
         project_dir=project_dir,
         remove_function_parameter_prefixes=["p"],
         async_mode=async_mode
