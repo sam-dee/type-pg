@@ -37,6 +37,6 @@ def validate_config(config: Config) -> list[ConfigError]:
     errors: list[ConfigError] = []
     for table in config.exclude_tables:
         if not re.match(r'^\w+\.\w+$', table):
-            errors.append(ConfigError(f'Exclude table "table" does not pattern <schema>.<table_name>'))
+            errors.append(ConfigError(f'Exclude table "{table}" does not pattern <schema>.<table_name>'))
 
     return errors
