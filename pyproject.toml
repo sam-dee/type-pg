@@ -3,7 +3,7 @@ name = "type_pg"
 readme = "README.md"
 version = "1.0.12"
 dependencies = [
-    "attrs~=24.2.0",
+    "attrs",
     "python-dateutil~=2.9.0.post0",
     "attr~=0.3.2",
     "typing_extensions~=4.12.2",
